@@ -21,9 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final productProvider = context.watch<ProductProvider>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lascade App'),
-      ),
+      appBar: AppBar(),
       body: context.watch<ProductProvider>().isLoading
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
