@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_reach/providers/product_provider.dart';
+import 'package:recipe_reach/screens/details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -154,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         final product = productProvider.products[index];
                         return _buildPopularRecipeCard(
+                          description: product.description,
                           imagePath: product.image,
                           title: product.description,
                         );
@@ -272,81 +274,95 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildPopularRecipeCard(
-      {required String title, required String imagePath}) {
+      {required String title,
+      required String imagePath,
+      required String description}) {
     return SizedBox(
       width: 200,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Card(
-          color: Colors.white,
-          elevation: 4, // Creates the shadow effect
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16), // Rounded corners
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // Image section
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    imagePath,
-                    height: 120, // Adjust height
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailsScreen(
+                      imagedata: imagePath,
+                      title: title,
+                      description: description),
+                ));
+          },
+          child: Card(
+            color: Colors.white,
+            elevation: 4, // Creates the shadow effect
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16), // Rounded corners
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // Image section
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      imagePath,
+                      height: 120, // Adjust height
 
-                    width: 128, // Match card width
-                    fit: BoxFit.cover, // Ensure the image covers the space
-                  ),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                // Text & Info section
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                      width: 128, // Match card width
+                      fit: BoxFit.cover, // Ensure the image covers the space
                     ),
-                    maxLines: 2,
-                    overflow:
-                        TextOverflow.ellipsis, // Ellipsis if text overflows
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 2.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(
-                        Icons.local_fire_department,
-                        size: 16,
-                        color: Color.fromRGBO(116, 129, 137, 1),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  // Text & Info section
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        "120 Kcal",
-                        style: TextStyle(
+                      maxLines: 2,
+                      overflow:
+                          TextOverflow.ellipsis, // Ellipsis if text overflows
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(
+                          Icons.local_fire_department,
+                          size: 16,
                           color: Color.fromRGBO(116, 129, 137, 1),
                         ),
-                      ),
-                      Icon(
-                        Icons.access_time,
-                        size: 16,
-                        color: Color.fromRGBO(116, 129, 137, 1),
-                      ),
-                      Text(
-                        "20 Min",
-                        style: TextStyle(
+                        Text(
+                          "120 Kcal",
+                          style: TextStyle(
+                            color: Color.fromRGBO(116, 129, 137, 1),
+                          ),
+                        ),
+                        Icon(
+                          Icons.access_time,
+                          size: 16,
                           color: Color.fromRGBO(116, 129, 137, 1),
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                        Text(
+                          "20 Min",
+                          style: TextStyle(
+                            color: Color.fromRGBO(116, 129, 137, 1),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

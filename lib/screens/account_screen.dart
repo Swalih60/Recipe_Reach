@@ -158,12 +158,32 @@ class _AccountScreenState extends State<AccountScreen> {
                 // Image section
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    imagePath,
-                    height: 110, // Adjust height
+                  child: Stack(
+                    children: [
+                      Image.network(
+                        imagePath,
+                        height: 110, // Adjust height
 
-                    width: 132, // Match card width
-                    fit: BoxFit.cover, // Ensure the image covers the space
+                        width: 132, // Match card width
+                        fit: BoxFit.cover, // Ensure the image covers the space
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.favorite_border_outlined)),
+                        ),
+                      ),
+                    ],
+                    alignment: Alignment.topRight,
                   ),
                 ),
                 SizedBox(
