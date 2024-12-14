@@ -34,6 +34,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: _pages[_selectedIndex], // Display the selected page
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
@@ -58,6 +59,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           icons: iconList, // List of icons for tabs
           activeIndex: _selectedIndex,
           gapLocation: GapLocation.center, // Align gap with FAB
+
           notchSmoothness: NotchSmoothness.softEdge, // Smooth curve
           backgroundColor: Colors.white,
           activeColor: const Color.fromRGBO(132, 219, 223, 1),

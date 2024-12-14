@@ -278,6 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
+          color: Colors.white,
           elevation: 4, // Creates the shadow effect
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16), // Rounded corners
