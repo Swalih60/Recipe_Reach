@@ -7,20 +7,8 @@ import 'package:recipe_reach/components/title_text.dart';
 import 'package:recipe_reach/components/view_all_button.dart';
 import 'package:recipe_reach/providers/product_provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-
-    context.read<ProductProvider>();
-  }
 
   @override
   Widget build(BuildContext context) {

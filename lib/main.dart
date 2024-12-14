@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_reach/components/bottom_navbar.dart';
+import 'package:recipe_reach/providers/bottom_nav_provider.dart';
 import 'package:recipe_reach/providers/product_provider.dart';
 import 'package:recipe_reach/screens/home_screen.dart';
 import 'package:recipe_reach/screens/login_screen.dart';
@@ -16,9 +17,14 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) {
+          final provider = ProductProvider();
+
+          return provider;
+        }),
         ChangeNotifierProvider(
-          create: (context) => ProductProvider(),
-        ),
+          create: (context) => BottomProvider(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -26,7 +32,7 @@ class MainApp extends StatelessWidget {
         title: "Recipe Reach",
         routes: {
           '/login': (context) => BottomNavBar(),
-          '/home': (context) => HomeScreen(),
+          '/home': (context) => const HomeScreen(),
         },
       ),
     );

@@ -34,16 +34,15 @@ class FavouriteCard extends StatelessWidget {
           },
           child: Card(
             color: Colors.white,
-            elevation: 4, // Creates the shadow effect
+            elevation: 4,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16), // Rounded corners
+              borderRadius: BorderRadius.circular(16),
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // Image section
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Stack(
@@ -51,11 +50,9 @@ class FavouriteCard extends StatelessWidget {
                       children: [
                         Image.network(
                           imagePath,
-                          height: 110, // Adjust height
-
-                          width: 132, // Match card width
-                          fit:
-                              BoxFit.cover, // Ensure the image covers the space
+                          height: 110,
+                          width: 132,
+                          fit: BoxFit.cover,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -79,7 +76,6 @@ class FavouriteCard extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  // Text & Info section
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
@@ -90,10 +86,8 @@ class FavouriteCard extends StatelessWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
-
                           maxLines: 2,
-                          overflow: TextOverflow
-                              .ellipsis, // Ellipsis if text overflows
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(
                           height: 5,

@@ -7,19 +7,8 @@ import 'package:recipe_reach/components/title_text.dart';
 import 'package:recipe_reach/components/view_all_button.dart';
 import 'package:recipe_reach/providers/product_provider.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
-
-  @override
-  State<SearchScreen> createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<ProductProvider>();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +123,4 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
-
-  //
 }

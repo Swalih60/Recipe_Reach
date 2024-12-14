@@ -6,25 +6,12 @@ import 'package:recipe_reach/components/title_text.dart';
 import 'package:recipe_reach/components/view_all_button.dart';
 import 'package:recipe_reach/providers/product_provider.dart';
 
-class AccountScreen extends StatefulWidget {
+class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
   @override
-  State<AccountScreen> createState() => _AccountScreenState();
-}
-
-class _AccountScreenState extends State<AccountScreen> {
-  @override
-  void initState() {
-    super.initState();
-    final productProvider =
-        Provider.of<ProductProvider>(context, listen: false);
-    productProvider.fetchProducts();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<ProductProvider>(context);
+    final productProvider = context.watch<ProductProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account',

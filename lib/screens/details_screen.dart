@@ -9,7 +9,7 @@ import 'package:recipe_reach/components/toggle_button.dart';
 import 'package:recipe_reach/components/view_all_button.dart';
 import 'package:recipe_reach/providers/product_provider.dart';
 
-class DetailsScreen extends StatefulWidget {
+class DetailsScreen extends StatelessWidget {
   final String imagedata;
   final String title;
   final String description;
@@ -22,21 +22,8 @@ class DetailsScreen extends StatefulWidget {
   });
 
   @override
-  State<DetailsScreen> createState() => _DetailsScreenState();
-}
-
-class _DetailsScreenState extends State<DetailsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    final productProvider =
-        Provider.of<ProductProvider>(context, listen: false);
-    productProvider.fetchProducts();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<ProductProvider>(context);
+    final productProvider = context.watch<ProductProvider>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -47,7 +34,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               height: 250,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(widget.imagedata),
+                  image: NetworkImage(imagedata),
                   fit: BoxFit.cover,
                   alignment: Alignment.center,
                 ),
@@ -121,7 +108,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
-                              limitWords(widget.title, 2),
+                              limitWords(title, 2),
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
@@ -135,7 +122,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
-                          widget.description,
+                          description,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style:
@@ -149,7 +136,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       const SizedBox(height: 16),
 
                       // Ingredients & Instructions Tabs
-                      ToggleButtonDesign(),
+                      const ToggleButtonDesign(),
                       const SizedBox(height: 16),
 
                       // Ingredients List

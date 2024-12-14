@@ -22,20 +22,19 @@ class EditorsChoiceCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Material(
-          elevation: 4, // Elevation for shadow effect
+          elevation: 4,
           borderRadius: BorderRadius.circular(12),
           child: ListTile(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16), // Rounded corners
+              borderRadius: BorderRadius.circular(16),
             ),
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.network(
                 imagePath,
-                height: 100, // Adjust height
-
-                width: 70, // Match card width
-                fit: BoxFit.cover, // Ensure the image covers the space
+                height: 100,
+                width: 70,
+                fit: BoxFit.cover,
               ),
             ),
             title: Padding(

@@ -1,25 +1,19 @@
 import "package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart";
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_reach/providers/bottom_nav_provider.dart';
 import 'package:recipe_reach/screens/account_screen.dart';
 import 'package:recipe_reach/screens/home_screen.dart';
 import 'package:recipe_reach/screens/search_screen.dart';
 
-class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _BottomNavBarState createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 0;
+class BottomNavBar extends StatelessWidget {
+  BottomNavBar({super.key});
 
   final List<Widget> _pages = [
-    HomeScreen(),
-    SearchScreen(),
-    HomeScreen(),
-    AccountScreen(),
+    const HomeScreen(),
+    const SearchScreen(),
+    const HomeScreen(),
+    const AccountScreen(),
   ];
 
   final List<IconData> iconList = [
@@ -31,17 +25,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<BottomProvider>();
     return Scaffold(
       extendBody: true,
-      body: _pages[_selectedIndex], // Display the selected page
+      body: _pages[provider.currentIndex],
       floatingActionButton: FloatingActionButton(
         elevation: 0,
         shape: const CircleBorder(),
         onPressed: () {
-          setState(() {
-            _selectedIndex = 2; // Update index on tap
-          });
-          // Navigator.pushNamed(context, "/home");
+          context.read<BottomProvider>().changeIndex(index: 2);
         },
         backgroundColor: const Color.fromRGBO(4, 38, 40, 1),
         child: Image.asset(
@@ -55,18 +47,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
         height: 66,
         child: AnimatedBottomNavigationBar(
           iconSize: 28,
-          icons: iconList, // List of icons for tabs
-          activeIndex: _selectedIndex,
-          gapLocation: GapLocation.center, // Align gap with FAB
-
-          notchSmoothness: NotchSmoothness.softEdge, // Smooth curve
+          icons: iconList,
+          activeIndex: provider.currentIndex,
+          gapLocation: GapLocation.center,
+          notchSmoothness: NotchSmoothness.softEdge,
           backgroundColor: Colors.white,
           activeColor: const Color.fromRGBO(132, 219, 223, 1),
           inactiveColor: Colors.black,
           onTap: (index) {
-            setState(() {
-              _selectedIndex = index; // Update index on tap
-            });
+            context.read<BottomProvider>().changeIndex(index: index);
           },
         ),
       ),

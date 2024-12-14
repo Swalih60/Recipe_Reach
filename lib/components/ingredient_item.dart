@@ -17,16 +17,17 @@ Widget buildIngredientItem(String name, String quantity) {
               width: 50,
             ),
           ),
-          Text(name, style: TextStyle(fontSize: 16)),
+          Text(name, style: const TextStyle(fontSize: 16)),
           Row(
             children: [
               IconButton(
-                icon: Icon(Icons.remove_circle_outline, color: Colors.teal),
+                icon:
+                    const Icon(Icons.remove_circle_outline, color: Colors.teal),
                 onPressed: () {},
               ),
-              Text(quantity, style: TextStyle(fontSize: 16)),
+              Text(quantity, style: const TextStyle(fontSize: 16)),
               IconButton(
-                icon: Icon(Icons.add_circle_outline, color: Colors.teal),
+                icon: const Icon(Icons.add_circle_outline, color: Colors.teal),
                 onPressed: () {},
               ),
             ],

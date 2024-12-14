@@ -31,30 +31,27 @@ class PopularRecipeCard extends StatelessWidget {
           },
           child: Card(
             color: Colors.white,
-            elevation: 4, // Creates the shadow effect
+            elevation: 4,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16), // Rounded corners
+              borderRadius: BorderRadius.circular(16),
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // Image section
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
                       imagePath,
-                      height: 120, // Adjust height
-
-                      width: 128, // Match card width
-                      fit: BoxFit.cover, // Ensure the image covers the space
+                      height: 120,
+                      width: 128,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
-                  // Text & Info section
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
@@ -64,12 +61,11 @@ class PopularRecipeCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                       maxLines: 2,
-                      overflow:
-                          TextOverflow.ellipsis, // Ellipsis if text overflows
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2.0),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 2.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
