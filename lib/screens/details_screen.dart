@@ -7,9 +7,8 @@ class DetailsScreen extends StatefulWidget {
   final String imagedata;
   final String title;
   final String description;
-  bool showIngredients = true;
 
-  DetailsScreen({
+  const DetailsScreen({
     super.key,
     required this.imagedata,
     required this.title,
@@ -38,19 +37,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
       body: Stack(
         children: [
           // Curved Image Background
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                height: 250, // Adjust as needed
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(widget.imagedata),
-                    fit: BoxFit
-                        .cover, // Ensures the image fills the container without distortion
-                    alignment: Alignment.center, // Centers the image
-                  ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              height: 250, // Adjust as needed
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(widget.imagedata),
+                  fit: BoxFit
+                      .cover, // Ensures the image fills the container without distortion
+                  alignment: Alignment.center, // Centers the image
                 ),
               ),
             ),
@@ -60,19 +56,22 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  alignment: Alignment.center,
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                    child: IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: Icon(Icons.close)),
                   ),
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(Icons.close)),
                 ),
                 Container(
                   alignment: Alignment.center,
@@ -122,7 +121,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
-                              limitWords(widget.title, 3),
+                              limitWords(widget.title, 2),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
@@ -305,9 +304,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget _buildInfoChip(IconData icon, String label) {
     return Row(
       children: [
-        Icon(icon, color: Colors.teal),
+        Icon(
+          icon,
+          color: Colors.teal,
+          size: 20,
+        ),
         SizedBox(width: 4),
-        Text(label, style: TextStyle(fontSize: 14)),
+        Text(label, style: TextStyle(fontSize: 12)),
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_reach/providers/product_provider.dart';
+import 'package:recipe_reach/screens/details_screen.dart';
 
 class AccountScreen extends StatefulWidget {
   @override
@@ -125,6 +126,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       itemBuilder: (context, index) {
                         final product = productProvider.products[index];
                         return _buildMyFavouriteCard(
+                          description: product.description,
                           title: product.title,
                           imagePath: product.image,
                         );
@@ -138,96 +140,112 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   Widget _buildMyFavouriteCard(
-      {required String title, required String imagePath}) {
+      {required String title,
+      required String imagePath,
+      required String description}) {
     return SizedBox(
       height: 100,
       width: 200,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Card(
-          color: Colors.white,
-          elevation: 4, // Creates the shadow effect
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16), // Rounded corners
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // Image section
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Stack(
-                    children: [
-                      Image.network(
-                        imagePath,
-                        height: 110, // Adjust height
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailsScreen(
+                      imagedata: imagePath,
+                      title: title,
+                      description: description),
+                ));
+          },
+          child: Card(
+            color: Colors.white,
+            elevation: 4, // Creates the shadow effect
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16), // Rounded corners
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // Image section
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Stack(
+                      children: [
+                        Image.network(
+                          imagePath,
+                          height: 110, // Adjust height
 
-                        width: 132, // Match card width
-                        fit: BoxFit.cover, // Ensure the image covers the space
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
+                          width: 132, // Match card width
+                          fit:
+                              BoxFit.cover, // Ensure the image covers the space
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.favorite_border_outlined)),
                           ),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.favorite_border_outlined)),
                         ),
-                      ),
-                    ],
-                    alignment: Alignment.topRight,
+                      ],
+                      alignment: Alignment.topRight,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                // Text & Info section
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  // Text & Info section
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
 
-                        maxLines: 2,
-                        overflow:
-                            TextOverflow.ellipsis, // Ellipsis if text overflows
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          CircleAvatar(
-                            radius: 10,
-                            backgroundImage: NetworkImage(imagePath),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "Swalih",
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
-                          ),
-                        ],
-                      )
-                    ],
+                          maxLines: 2,
+                          overflow: TextOverflow
+                              .ellipsis, // Ellipsis if text overflows
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                              radius: 10,
+                              backgroundImage: NetworkImage(imagePath),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "Swalih",
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.grey),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

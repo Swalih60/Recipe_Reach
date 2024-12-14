@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_reach/providers/product_provider.dart';
+import 'package:recipe_reach/screens/details_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -90,7 +91,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         itemBuilder: (context, index) {
                           final product = productProvider.products[index];
                           return _buildRecipeCard(
-                              title: product.title, imagePath: product.image);
+                              title: product.title,
+                              imagePath: product.image,
+                              description: product.description);
                         },
                       ),
               ),
@@ -152,51 +155,66 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget _buildRecipeCard({required String title, required String imagePath}) {
+  Widget _buildRecipeCard(
+      {required String title,
+      required String imagePath,
+      required String description}) {
     return SizedBox(
       width: 130,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Card(
-          color: Colors.white,
-          elevation: 4, // Creates the shadow effect
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16), // Rounded corners
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // Image section
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    imagePath,
-                    height: 80, // Adjust height
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailsScreen(
+                      imagedata: imagePath,
+                      title: title,
+                      description: description),
+                ));
+          },
+          child: Card(
+            color: Colors.white,
+            elevation: 4, // Creates the shadow effect
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16), // Rounded corners
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // Image section
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      imagePath,
+                      height: 80, // Adjust height
 
-                    width: 80, // Match card width
-                    fit: BoxFit.cover, // Ensure the image covers the space
-                  ),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                // Text & Info section
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 16,
+                      width: 80, // Match card width
+                      fit: BoxFit.cover, // Ensure the image covers the space
                     ),
-                    maxLines: 1,
-
-                    overflow:
-                        TextOverflow.ellipsis, // Ellipsis if text overflows
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 12,
+                  ),
+                  // Text & Info section
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                      maxLines: 1,
+
+                      overflow:
+                          TextOverflow.ellipsis, // Ellipsis if text overflows
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -269,7 +287,16 @@ class _SearchScreenState extends State<SearchScreen> {
                 color: const Color.fromRGBO(4, 38, 40, 1),
               ),
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                              imagedata: imagePath,
+                              title: title,
+                              description: description),
+                        ));
+                  },
                   icon: Icon(
                     Icons.arrow_forward,
                     color: Colors.white,
