@@ -8,6 +8,8 @@ import 'package:recipe_reach/components/view_all_button.dart';
 import 'package:recipe_reach/providers/product_provider.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -56,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Welcome Text
             const Text(
               'Alena Sabyan',
               style: TextStyle(
