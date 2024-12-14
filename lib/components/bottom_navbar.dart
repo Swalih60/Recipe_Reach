@@ -1,7 +1,6 @@
 import "package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart";
 import 'package:flutter/material.dart';
 import 'package:recipe_reach/screens/account_screen.dart';
-import 'package:recipe_reach/screens/details_screen.dart';
 import 'package:recipe_reach/screens/home_screen.dart';
 import 'package:recipe_reach/screens/search_screen.dart';
 
@@ -19,7 +18,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _pages = [
     HomeScreen(),
     SearchScreen(),
-    DetailsScreen(),
     HomeScreen(),
     AccountScreen(),
   ];
@@ -37,6 +35,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       extendBody: true,
       body: _pages[_selectedIndex], // Display the selected page
       floatingActionButton: FloatingActionButton(
+        elevation: 0,
         shape: const CircleBorder(),
         onPressed: () {
           setState(() {
