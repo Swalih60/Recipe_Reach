@@ -9,6 +9,10 @@ class ProductProvider extends ChangeNotifier {
   List<ProductModel> get products => _products;
   bool get isLoading => _isLoading;
 
+  ProductProvider() {
+    fetchProducts();
+  }
+
   Future<void> fetchProducts() async {
     _isLoading = true;
     notifyListeners();
