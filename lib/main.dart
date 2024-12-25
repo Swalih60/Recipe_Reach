@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) {
           final provider = ProductProvider();
-
+          provider.fetchProducts();
           return provider;
         }),
         ChangeNotifierProvider(

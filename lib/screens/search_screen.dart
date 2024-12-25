@@ -12,7 +12,8 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productProvider = context.watch<ProductProvider>();
+    final productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
     return Scaffold(
       extendBody: true,
       appBar: AppBar(

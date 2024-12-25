@@ -23,7 +23,8 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productProvider = context.watch<ProductProvider>();
+    final productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
